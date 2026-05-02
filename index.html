@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精品图书商城 | 实验3</title>
+    <link rel="stylesheet" href="css/lab4-软工2302-031-index.css">
+    <style>
+        .debug { border: 1px solid red; }
+    </style>
+</head>
+<body>
+    <!-- 登录遮罩 + 弹窗（默认隐藏） -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-box">
+            <span class="close-btn" id="closeBtn">&times;</span>
+            <!-- 登录表单 -->
+            <div class="form-box login-form" id="loginForm">
+                <h3>用户登录</h3>
+                <div class="input-group">
+                    <label>用户名：</label>
+                    <input type="text" id="loginUser" placeholder="请输入用户名">
+                </div>
+                <div class="input-group">
+                    <label>密码：</label>
+                    <input type="password" id="loginPwd" placeholder="请输入密码">
+                </div>
+                <div class="msg" id="loginMsg"></div>
+                <button class="submit-btn" id="loginBtn">登录</button>
+                <p class="toggle-text">没有账号？<a href="javascript:;" id="toReg">立即注册</a></p>
+            </div>
+
+            <!-- 注册表单 -->
+            <div class="form-box register-form hidden" id="registerForm">
+                <h3>用户注册</h3>
+                <div class="input-group">
+                    <label>用户名：</label>
+                    <input type="text" id="regUser" placeholder="请设置用户名">
+                </div>
+                <div class="input-group">
+                    <label>密码：</label>
+                    <input type="password" id="regPwd" placeholder="请设置密码">
+                </div>
+                <div class="msg" id="regMsg"></div>
+                <button class="submit-btn" id="regBtn">注册</button>
+                <p class="toggle-text">已有账号？<a href="javascript:;" id="toLogin">立即登录</a></p>
+            </div>
+        </div>
+    </div>
+
+    <header class="site-header">
+        <div class="logo-container">
+            <img src="images/logo.png" alt="图书商城Logo" class="logo">
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list clearfix">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">图书分类</a></li>
+                <li><a href="#">热门推荐</a></li>
+                <li><a href="#">新书上市</a></li>
+                <li><a href="javascript:;" id="loginLink">登录/注册</a></li>
+                <!-- ✅ 搜索图标 已加入 -->
+                <li><span class="search-icon">🔍</span></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container clearfix">
+        <aside class="sidebar-left">
+            <h3 class="sidebar-title">图书分类</h3>
+            <ul class="category-list">
+                <li><a href="#">文学小说</a></li>
+                <li><a href="#">科学技术</a></li>
+                <li><a href="#">经济管理</a></li>
+                <li><a href="#">生活艺术</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <!-- 轮播图 已拉高 -->
+            <div class="slider-box">
+                <div class="slider-list">
+                    <div class="slider-item"><img src="images/book1.jpg" alt=""></div>
+                    <div class="slider-item"><img src="images/book2.jpg" alt=""></div>
+                    <div class="slider-item"><img src="images/book3.jpg" alt=""></div>
+                </div>
+            </div>
+
+            <section class="book-gallery">
+                <div class="book-item">
+                    <img src="images/book1.jpg" alt="三体" class="book-cover">
+                    <div class="book-overlay">
+                        <h4>三体（全集）</h4>
+                        <p>刘慈欣 著 | 科幻巨著</p>
+                        <button class="add-cart">🛒 加入购物车</button>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <img src="images/book2.jpg" alt="数据结构" class="book-cover">
+                    <div class="book-overlay">
+                        <h4>数据结构</h4>
+                        <p>严薇敏 著 | 计算机系列教材</p>
+                        <button class="add-cart">🛒 加入购物车</button>
+                    </div>
+                </div>
+				<div class="book-item">
+				    <img src="images/book3.jpg" alt="第七天" class="book-cover">
+				    <div class="book-overlay">
+				        <h4>第七天</h4>
+				        <p>余华 著 | 文学名著</p>
+				        <button class="add-cart">🛒 加入购物车</button>
+				    </div>
+				</div>
+            </section>
+
+            <section class="recommend-section">
+                <h3 class="section-title">热门推荐</h3>
+                <div class="recommend-list clearfix">
+                    <div class="recommend-card">计算机网络</div>
+                    <div class="recommend-card">云计算技术及应用</div>
+                    <div class="recommend-card">文化苦旅</div>
+                </div>
+            </section>
+
+            <section class="new-books-section">
+                <h3 class="section-title">新书上市</h3>
+                <table class="book-table">
+                    <thead>
+                        <tr>
+                            <th>书名</th>
+                            <th>作者</th>
+                            <th>价格</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>时间简史</td>
+                            <td>霍金</td>
+                            <td>¥35.00</td>
+                        </tr>
+                        <tr>
+                            <td>生死疲劳</td>
+                            <td>莫言</td>
+                            <td>¥59.00</td>
+                        </tr>
+						<tr>
+						    <td>云计算技术及应用</td>
+						    <td>李洪波</td>
+						    <td>¥69.80</td>
+						</tr>
+						<tr>
+						    <td>计算机组成原理</td>
+						    <td>唐朔飞</td>
+						    <td>¥49.00</td>
+						</tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <aside class="sidebar-right">
+            <div class="ad-container">
+                <img src="images/ad.jpg" alt="促销广告" class="ad-image">
+                <p class="ad-text">限时特惠：满200减50</p>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="site-footer">
+        <p>© 2026 图书商城 版权所有</p>
+    </footer>
+
+    <script>
+        // 获取DOM元素
+        const loginModal = document.getElementById('loginModal');
+        const loginLink = document.getElementById('loginLink');
+        const closeBtn = document.getElementById('closeBtn');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const toReg = document.getElementById('toReg');
+        const toLogin = document.getElementById('toLogin');
+
+        // 打开登录弹窗
+        loginLink.onclick = () => {
+            loginModal.style.display = 'flex';
+        };
+
+        // 关闭弹窗
+        closeBtn.onclick = () => {
+            loginModal.style.display = 'none';
+        };
+
+        // 切换到注册
+        toReg.onclick = () => {
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+        };
+
+        // 切换到登录
+        toLogin.onclick = () => {
+            registerForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+        };
+
+        // ===================== 注册功能 =====================
+        const regBtn = document.getElementById('regBtn');
+        const regUser = document.getElementById('regUser');
+        const regPwd = document.getElementById('regPwd');
+        const regMsg = document.getElementById('regMsg');
+
+        regBtn.onclick = () => {
+            const username = regUser.value.trim();
+            const password = regPwd.value.trim();
+
+            if(!username || !password){
+                regMsg.innerText = '用户名和密码不能为空！';
+                regMsg.style.color = 'red';
+                return;
+            }
+
+            // 读取本地已注册用户
+            let user = localStorage.getItem('bookUser');
+            if(user){
+                regMsg.innerText = '该用户已注册！';
+                regMsg.style.color = 'red';
+                return;
+            }
+
+            // 保存到本地存储
+            localStorage.setItem('bookUser', username);
+            localStorage.setItem('bookPwd', password);
+            
+            regMsg.innerText = '注册成功！正在跳转到登录...';
+            regMsg.style.color = 'green';
+            
+            // 1秒后切换到登录
+            setTimeout(()=>{
+                toLogin.click();
+            },1000);
+        };
+
+        // ===================== 登录功能 =====================
+        const loginBtn = document.getElementById('loginBtn');
+        const loginUser = document.getElementById('loginUser');
+        const loginPwd = document.getElementById('loginPwd');
+        const loginMsg = document.getElementById('loginMsg');
+
+        loginBtn.onclick = () => {
+            const username = loginUser.value.trim();
+            const password = loginPwd.value.trim();
+
+            if(!username || !password){
+                loginMsg.innerText = '请输入用户名和密码！';
+                loginMsg.style.color = 'red';
+                return;
+            }
+
+            // 从本地存储获取数据
+            const localUser = localStorage.getItem('bookUser');
+            const localPwd = localStorage.getItem('bookPwd');
+
+            if(username === localUser && password === localPwd){
+                loginMsg.innerText = '登录成功！';
+                loginMsg.style.color = 'green';
+                setTimeout(()=>{
+                    loginModal.style.display = 'none';
+                    loginLink.innerText = `欢迎，${localUser}`;
+                },1000);
+            }else{
+                loginMsg.innerText = '用户名或密码错误！';
+                loginMsg.style.color = 'red';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft YaHei', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* ===================== 登录弹窗样式 ===================== */
+.login-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    position: relative;
+    width: 400px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 40px 30px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.form-box {
+    display: block;
+}
+
+.form-box h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #3498db;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.input-group input {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #3498db;
+}
+
+/* 登录按钮动画：渐变+缩放 */
+.submit-btn {
+    width: 100%;
+    height: 42px;
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #2980b9;
+    transform: scale(1.05);
+}
+
+.toggle-text {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.toggle-text a {
+    color: #3498db;
+}
+
+.msg {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===================== 头部导航 ===================== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+}
+
+.logo {
+    height: 60px;
+}
+
+.nav-list li {
+    float: left;
+    margin-left: 30px;
+    list-style: none;
+    line-height: 80px;
+}
+
+.nav-list a:hover {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* 搜索图标 悬停旋转 */
+.search-icon {
+    font-size: 20px;
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.4s ease;
+}
+.search-icon:hover {
+    transform: rotate(360deg);
+}
+
+/* ===================== 主体布局 ===================== */
+.main-container {
+    width: 1200px;
+    margin: 100px auto 0;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    padding: 20px;
+}
+
+.sidebar-left {
+    width: 200px;
+    float: left;
+}
+
+.sidebar-title {
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.category-list li {
+    padding: 8px 15px;
+    border-bottom: 1px dashed #eee;
+    transition: all 0.3s;
+    list-style: none;
+}
+
+.category-list li:hover {
+    background-color: #f8f9fa;
+    padding-left: 20px;
+}
+
+.main-content {
+    width: 760px;
+    float: left;
+    margin: 0 20px;
+}
+
+.section-title {
+    padding: 10px 0;
+    border-bottom: 2px solid #3498db;
+    margin: 20px 0;
+    color: #2c3e50;
+}
+
+/* ===================== 轮播图 修复版 不重叠 从下向上 ===================== */
+.slider-box {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+.slider-item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    animation: upMove 12s infinite;
+}
+
+.slider-item:nth-child(1) { animation-delay: 0s; }
+.slider-item:nth-child(2) { animation-delay: 4s; }
+.slider-item:nth-child(3) { animation-delay: 8s; }
+
+.slider-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 从下向上滑入淡出 */
+@keyframes upMove {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    8% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    30% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    38% {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+}
+
+/* ===================== 图书列表动效 ===================== */
+.book-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.book-item {
+    width: 220px;
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+}
+
+.book-item:hover {
+    transform: translateX(8px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 15px;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+}
+
+.book-item:hover .book-overlay {
+    transform: translateY(0);
+}
+
+/* 购物车按钮 旋转动画 */
+.add-cart {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.3s ease;
+}
+.add-cart:hover {
+    transform: rotate(15deg) scale(1.08);
+}
+
+/* ===================== 热门推荐 ===================== */
+.recommend-card {
+    width: 22%;
+    height: 120px;
+    float: left;
+    margin-right: 4%;
+    background: #f8f9fa;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.recommend-card:hover {
+    background: #3498db;
+    color: white;
+    transform: scale(1.05);
+}
+
+.recommend-card:nth-child(3n) {
+    margin-right: 0;
+}
+
+/* ===================== 图书表格 ===================== */
+.book-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.book-table th, .book-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.book-table th {
+    background-color: #3498db;
+    color: white;
+}
+
+.book-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* ===================== 右侧边栏 ===================== */
+.sidebar-right {
+    width: 200px;
+    float: left;
+    position: fixed;
+    right: 50px;
+    top: 150px;
+}
+
+.ad-container {
+    width: 180px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.ad-image {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.ad-text {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* ===================== 页脚 ===================== */
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    background: #2c3e50;
+    color: white;
+    margin-top: 50px;
+}
